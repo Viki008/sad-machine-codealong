@@ -1,4 +1,8 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import {
+  NextApiRequest,
+  NextApiResponse,
+} from 'next';
+
 import { transform } from '../../util/openWeatherMap';
 
 /**
@@ -120,9 +124,9 @@ export default async function weatherHandler(
   const response = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${req.query.q}&units=metric&appId=${process.env.OPENWEATHERMAP_API_KEY}`,
   );
-  const Json = (await response.json()) as WeatherData;
+  const json = (await response.json()) as WeatherData;
 
-  const result = transform(Json);
+  const result = transform(json);
 
   if (result.error) {
     return res
